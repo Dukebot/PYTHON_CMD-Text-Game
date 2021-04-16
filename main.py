@@ -48,7 +48,7 @@ def main():
 #Aux function that reads the data of a json and return a dictionary
 def read_json(json_path):
     with open(json_path) as json_file:
-        return json.load(json_file)
+        return json.load(json_file, encoding='utf-8')
 
 
 #Given the scene dictionary it returns the text of the current state
