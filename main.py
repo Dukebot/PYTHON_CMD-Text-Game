@@ -3,12 +3,16 @@ import json
 
 #Main function of the program, here we read the game data and process the game loop
 def main():
-    #Initialize the game data from json and set the first scene data
+    #Select the game language code
     language = select_language()
+    
+    #Read the game data from json files
     game_state = read_json('game_data/game_state.json')
     scenes = read_json('game_data/scenes_' + language + '.json')
-    scene = scenes["start_menu"]
 
+    #Load the first scene data
+    scene = scenes["start_menu"]
+    
     #Game loop
     while True:
         #Read the current state of the scene and update the game state if necessary
@@ -46,6 +50,7 @@ def main():
     return 0
 
 
+#This functions allows the player to select the language and returns it's code (string)
 def select_language():
     while True:
         print("\nSelect language\n")
