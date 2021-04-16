@@ -1,0 +1,924 @@
+{
+    "start_menu": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "Bienvenido a DARK ROOM, un videojuego de texto basado en elecciones.",
+                "choices": [
+                    {
+                        "choice": "Empezar",
+                        "result": "Cargando DARK ROOM...",
+                        "to_scene": "starting_room"
+                    }, {
+                        "choice": "Salir",
+                        "result": "Nos vemos pronto.",
+                        "to_state": "exit_game"
+                    }
+                ]
+            },
+            "exit_game": {
+                "text": "Cerrando..."
+            }
+        }
+    },
+    "starting_room": {
+        "current_state": "dark_room",
+        "states": {
+            "dark_room": {
+                "text": "Te despiertas en una habitación oscura, no tienes ni idea de cómo has llegado aquí, tienes esto en los bolsillos:\nun mechero, un clip y una colilla.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "No puedes ver nada."
+                    }, {
+                        "choice": "Mechero", 
+                        "result": "La habitación se ilumina un poco.",
+                        "to_state": "lit_room"
+                    }, {
+                        "choice": "Clip", 
+                        "result": "Inútil por ahora, podría serte útil más tarde."
+                    }, {
+                        "choice": "Colilla", 
+                        "result": "Inútil."
+                    }
+                ]
+            }, 
+            "lit_room": {
+                "text": "La habitación es rara, no tiene ventanas y sus paredes son raras, parecen hechas de carne.\nVes una puerta y un armario, ambos cerrados.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "La habitación es rara, no tiene ventanas y sus paredes son raras, parecen hechas de carne."
+                    }, {
+                        "choice": "Examinar el Armario", 
+                        "result": "Es un armario bonito."
+                    }, {
+                        "choice": "Acercarse al Armario",
+                        "result": "Te acercas al armario.",
+                        "to_scene": "cabinet",
+                        "show_if": {"door_key": false}
+                    }, {
+                        "choice": "Acercarse al Armario",
+                        "result": "Ya no contiene nada útil.",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Llave Extraña",
+                        "result": "La llave tiene un diseño raro. Es fría al tacto, tanto que duele.",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Examinar la Puerta",
+                        "result": "Una puerta normal y corriente."
+                    }, {
+                        "choice": "Acercarse a la Puerta",
+                        "result": "Te acercas a la puerta.",
+                        "to_scene": "door"
+                    }, {
+                        "choice": "Clip",
+                        "result": "Inútil por ahora, podría serte útil más tarde."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "Inútil."
+                    }
+                ]
+            }
+        }
+    },
+    "cabinet": {
+        "current_state": "locked",
+        "states": {
+            "locked": {
+                "text": "Te paras cerca del armario.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Está cerrado con llave."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "No puedo abrirlo con las manos."
+                    }, {
+                        "choice": "Clip",
+                        "result": "Fuerzas la cerradura con el clip.",
+                        "to_state": "open"
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¿Qué estás intentando hacer?"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "open": {
+                "text": "El armario está abierto.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Hay cosas dentro."
+                    }, {
+                        "choice": "Buscar",
+                        "result": "Encuentras una extraña llave.",
+                        "to_state": "open_key",
+                        "updates_game_state": {"door_key": true}
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "open_key": {
+                "text": "Coges la llave del armario.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Ya no hay nada de interés."
+                    }, {
+                        "choice": "Strange Key",
+                        "result": "La llave tiene un diseño raro. Es fría al tacto, tanto que duele."
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            }
+        }
+    },
+    "door": {
+        "current_state": "locked",
+        "states": {
+            "locked": {
+                "text": "Te paras cerca de la puerta.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Está bien cerrada."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "No puedo abrirla con las manos."
+                    }, {
+                        "choice": "Clip",
+                        "result": "No puedes abrir la puerta con el clip."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¿Planeas abrir la puerta con una colilla?"
+                    }, {
+                        "choice": "Usar la Llave Extraña",
+                        "result": "Abres la puerta con la llave.",
+                        "to_state": "unlocked",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "unlocked": {
+                "text": "La puerta está abierta.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Hay una cocina al otro lado."
+                    }, {
+                        "choice": "Atravesarla",
+                        "result": "Vas a la otra habitación.",
+                        "to_scene": "kitchen"
+                    }, {
+                        "choice": "Clip",
+                        "result": "La puerta ya está abierta."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Estás loco?!"
+                    }, {
+                        "choice": "Usar la Llave Extraña",
+                        "result": "La puerta ya está abierta."
+                    }, {
+                        "choice": "Volver",
+                        "result": "No sirve de nada quedarse aquí."
+                    }
+                ]
+            }
+        }
+    },
+    "kitchen": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "Estás en una cocina, huele a podrido. Encuentras la caja de fusibles de la 'casa' y la enciences, por fin puedes ver sin el mechero. Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina. También hay una ventana y una puerta muy rara, pero no parece tener cerradura, tiene unos extraños símbolos.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina."
+                    }, {
+                        "choice": "Ventana",
+                        "result": "Solo puedes ver un oscuro vacío. Está bien cerrada."
+                    }, {
+                        "choice": "Nevera",
+                        "result": "Una nevera como cualquier otra."
+                    }, {
+                        "choice": "Acercarse a la Nevera",
+                        "result": "Te acercas a la nevera.",
+                        "to_scene": "fridge",
+                        "show_if": {"bottle": false}
+                    }, {
+                        "choice": "Acercarse a la Nevera",
+                        "result": "Ya no contiene nada útil.",
+                        "show_if": {"bottle": true}
+                    }, {
+                        "choice": "Horno",
+                        "result": "Está un poco sucio."
+                    }, {
+                        "choice": "Acercarse al Horno",
+                        "result": "Te acercas al horno.",
+                        "to_scene": "oven",
+                        "show_if": {"note": false}
+                    }, {
+                        "choice": "Acercarse al Horno",
+                        "result": "Ya no contiene nada útil.",
+                        "show_if": {"note": true}
+                    }, {
+                        "choice": "Encimera",
+                        "result": "Está hecha un desastre, hay un cuchillo encima."
+                    }, {
+                        "choice": "Acercarse a la Encimera",
+                        "result": "Te acercas a la encimera.",
+                        "to_scene": "countertop",
+                        "show_if": {"knife": false}
+                    }, {
+                        "choice": "Acercarse a la Encimera",
+                        "result": "Ya no hay nada útil.",
+                        "show_if": {"knife": true} 
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Qué?! No."
+                    }, {
+                        "choice": "Puerta Misteriosa",
+                        "result": "Es rara, tiene unos extraños símbolos."
+                    }, {
+                        "choice": "Acercarse a la Puerta",
+                        "result": "Te acercas a la puerta.",
+                        "to_scene": "strange_door" 
+                    }, {
+                        "choice": "Botella",
+                        "result": "El líquido de dentro huele raro.",
+                        "show_if": {"bottle": true}
+                    }, {
+                        "choice": "Cuchillo",
+                        "result": "Está muy afilado.",
+                        "show_if": {"knife": true}
+                    }, {
+                        "choice": "Notita",
+                        "result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+                        "show_if": {"note": true}
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Qué?! No."
+                    }
+                ]
+            }
+        }
+    },
+    "fridge": {
+        "current_state": "closed",
+        "states": {
+            "closed": {
+                "text": "Te paras cerca de la nevera.",
+                "choices": [
+                    {
+                        "choice": "Examinar", 
+                        "result": "Una nevera como cualquier otra."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "Está llena de comida podrida, apesta. Hay una botella, con un líquido de color extraño en su interior, que puedes coger.",
+                        "to_state": "opened"
+                    }, {
+                        "choice": "Clip",
+                        "result": "No lo necesitas."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Es que eres tonto?!"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+            "opened": {
+                "text": "Has abierto la nevera.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Está abierta."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "Ya está abierta..."
+                    }, {
+                        "choice": "Clip",
+                        "result": "No lo necesitas."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Es que eres tonto?!"
+                    }, {
+                        "choice": "Coger la Botella",
+                        "result": "La coges y te la guardas.",
+                        "updates_game_state": {"bottle": true},
+                        "show_if": {"bottle": false}
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "oven": {
+        "current_state": "closed",
+        "states": {
+            "closed": {
+                "text": "Te paras al lado del horno.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Un horno, de los de toda la vida, está un poco sucio."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "Hay un pavo podrido, sin cocinar, dentro. Huele fatal.",
+                        "to_state": "opened"
+                    }, {
+                        "choice": "Clip",
+                        "result": "No lo necesitas."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Mmh?!"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }, 
+            "opened": {
+                "text": "Has abierto el horno.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Está abierto."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "Ya está abierto..."
+                    }, {
+                        "choice": "Clip",
+                        "result": "No lo necesitas."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "¡¿Mmh?!"
+                    }, {
+                        "choice": "Examinar el Pavo",
+                        "result": "Tiene algo dentro, es asqueroso pero lo coges.",
+                        "updates_game_state": {"note": true},
+                        "show_if": {"note": false}
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "countertop": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "Te paras al lado de la encimera.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Está hecha un desastre, hay un cuchillo encima."
+                    }, {
+                        "choice": "Coger el Cuchillo",
+                        "result": "Agarras el cuchillo y te lo guardas.",
+                        "updates_game_state": {"knife": true},
+                        "show_if": {"knife": false}
+                    }, {
+                        "choice": "Clip",
+                        "result": "No lo necesitas."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Eh?!"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "strange_door": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "Te paras al lado de la puerta.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Es rara, tiene unos extraños símbolos."
+                    }, {
+                        "choice": "Abrir",
+                        "result": "No sabes cómo, no tiene pomo."
+                    }, {
+                        "choice": "Clip",
+                        "result": "No tiene cerradura donde insertar el clip."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "¡¿Qué?! La puerta reacciona a los componentes del cigarrillo y aparece un texto en ella.",
+                        "to_state": "door_text"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+            "door_text": {
+                "text": "Ha aparecido un texto en la puerta.",
+                "choices": [
+                    {
+                        "choice": "Examinar",
+                        "result": "Ha aparecido un texto en la puerta."
+                    }, {
+                        "choice": "Leer el Texto",
+                        "result": "Dice: 'Debes usar sangre, pero no sangre pura...'."
+                    }, {
+                        "choice": "Clip",
+                        "result": "No tiene cerradura donde insertar el clip."
+                    }, {
+                        "choice": "Colilla",
+                        "result": "No pasa nada más."
+                    }, {
+                        "choice": "Ritual",
+                        "result": "No pasa nada.",
+                        "show_if": {"knife": false, "bottle": false} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "Tienes un cuchillo, pero falta algo.",
+                        "show_if": {"knife": true, "bottle": false} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "Tienes una botella, pero falta algo.",
+                        "show_if": {"knife": false, "bottle": true} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "Procedes a realizar el ritual.",
+                        "show_if": {"knife": true, "bottle": true},
+						"to_state": "door_ritual"
+                    }, {
+                        "choice": "Volver",
+                        "result": "Vuelves a donde estabas.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+			"door_ritual": {
+				"text": "La puerta se ha abierto.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "La puerta está abierta."
+					}, {
+						"choice": "Clip",
+						"result": "Eso no sirve para nada."
+					}, {
+						"choice": "Colilla",
+						"result": "No pasa nada más."
+					}, {
+						"choice": "Ritual",
+						"result": "Ya has realizado el ritual."
+					}, {
+						"choice": "Entrar",
+						"result": "Cruzas la puerta.",
+						"to_scene": "elevator"
+					}, {
+						"choice": "Volver",
+						"result": "Ahora no puedes echarte atrás."
+					}
+				]
+			}
+        }
+    },
+	"elevator": {
+		"current_state": "floor_1",
+        "states": {
+			"floor_1": {
+				"text": "Estás en un ascensor. El cartel dice '1r Piso'.",
+                "updates_game_state": {"woman_talked": false},
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "¿Qué hace aquí un ascensor?"
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 2o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_4"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "No pasa nada..."
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "No pasa nada..."
+					}
+				]
+			},
+			"floor_4": {
+				"text": "Llegas al 4o piso.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Estoy en el cuarto piso."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 2o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_2"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_2": {
+				"text": "Llegas al 2o piso.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Estoy en el segundo piso."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_6"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_6": {
+				"text": "Llegas al 6o piso.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Estoy en el sexto piso."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 2o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_2_2"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_2_2": {
+				"text": "Llegas al 2o piso.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Estoy en el segundo piso, otra vez."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_10"
+					}
+				]
+			},
+			"floor_10": {
+				"text": "Llegas al 10o piso.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Estoy en el décimo piso, estoy empezando a cansarme."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 2o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 5o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_5"
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_5": {
+				"text": "Llegas al 5o piso. Se sube una mujer joven.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Ahora, estoy en el quinto piso, ufff. Hay una mujer conmigo."
+					}, {
+						"choice": "Botones",
+						"result": "Los botones llegan al 10o piso."
+					}, {
+						"choice": "Notita",
+						"result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Mujer",
+						"result": "No deja de mirarme, es bastante mona."
+					}, {
+						"choice": "Hablar con la Mujer",
+						"result": "Abre su boca y te desmayas.",
+						"updates_game_state": {"woman_talked": true}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_scene": "ending",
+						"show_if":  {"woman_talked": false}
+					}, {
+						"choice": "Botón 1r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1",
+						"show_if":  {"woman_talked": true}
+					}, {
+						"choice": "Botón 2o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 3r Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 4o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 6o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 7o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 8o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 9o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "Botón 10o Piso",
+						"result": "El ascensor empieza a moverse...",
+						"to_state": "floor_1"
+					}
+				]
+			}
+		}
+	},
+	"ending": {
+		"current_state": "default",
+        "states": {
+			"default": {
+				"text": "Has apretado el botón del primer piso pero el ascensor ha ido al décimo.\nLa mujer te pregunta '¿A dónde vas?'.",
+				"choices": [
+					{
+						"choice": "Examinar",
+						"result": "Los botones han desaparecido, ya no puedes usar el ascensor."
+					}, {
+						"choice": "Contestar la Pregunta de la Mujer",
+						"result": "Se te echa encima y te clava sus afilados dientes en el cuello. Te desangras hasta la muerte.",
+						"to_state": "death"
+					}, {
+						"choice": "No Hacer Nada",
+						"result": "Estoy cansado, esto no sirve de nada.",
+						"to_state": "trapped"
+					}, {
+						"choice": "Salir",
+						"result": "Sales del ascensor.",
+						"to_state": "freedom"
+					}
+				]
+			},
+			"death": {
+				"text": "HAS MUERTO. GAME OVER. THE END. FIN. C'EST FINI. FINE."
+			},
+			"trapped": {
+				"text": "Te quedas en el ascensor el resto de tu vida.\nFIN."
+			},
+			"freedom": {
+				"text": "Te encuentras en una ciudad vacía, te sientes desolado,\npero cualquier cosa es mejor que quedarse en el ascensor con esa extraña mujer.\nFIN."
+			}
+		}
+	}
+}
