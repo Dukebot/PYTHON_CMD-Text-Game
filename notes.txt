@@ -1,5 +1,5 @@
-How to create program executable:
-    Use this command to make the build.
+How to create program executable on Windows:
+    Use this command to make the build (pyinstaller is required for this step).
         pyinstaller --onefile main.py
     Put the generated ".exe" at the same level of the folder "game_data".
     Run and enjoy.
