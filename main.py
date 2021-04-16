@@ -1,99 +1,116 @@
 import json
 
 
+#Main function of the program, here we read the game data and process the game loop
 def main():
-    #print("\033[1;32;40m Bright Green  \n")
-
-    #Read game data from json files
+    #Initialize the game data from json and set the first scene data
     game_state = read_json('game_data/game_state.json')
     scenes = read_json('game_data/scenes.json')
+    scene = scenes["start_menu"]
 
-    #Load the data of the firt scene
-    scene = scenes["starting_room"]
-
+    #Game loop
     while True:
-        #Get the scene data
-        state = scene["current_state"]
-        text = scene["states"][state]["text"]
-        choices = scene["states"][state]["choices"]
+        #Read the current state of the scene and update the game state if necessary
+        current_state = scene["current_state"]
+        update_game_state(scene["states"][current_state], game_state)
 
-        available_choices = get_choices_filtered(choices, game_state)
+        #Print the scene text on the screen
+        print("\n" + get_scene_text(scene) + "\n")
+
+        #If this scene do not have available choices it means we reached the end of the game
+        if not "choices" in scene["states"][current_state]:
+            print("\nPress ENTER to END...")
+            input()
+            break
+
+        #Get the available choices of this scene and print them to the screen
+        available_choices = get_available_choices(scene, game_state)
+        print_available_choices(available_choices)
         
-        #Print scene text
-        print("\n" + text + "\n")
-        i = 0
-        for available_choice in available_choices:
-            print(str(i) + " - " + available_choice["choice"])
-            i += 1
+        #Select the choice and print the result on the screen
+        choice = select_choice(available_choices)
+        update_game_state(choice, game_state)
+        print("\n" + choice["result"])
 
-        #Select choice
-        choice_selected = select_choice(available_choices)
-        choice = available_choices[choice_selected]
-
-        #Print choice result
-        choice_result = choice["result"]
-        print("\n" + choice_result)
-
-        #Check if this choice brigs us to other scene
-        if "to_scene" in choice:
-            to_scene = choice["to_scene"]
-            scene = scenes[to_scene]
-        
-        #Check if this choice updates the state of the scene
+        #Update state and handle scene transition
         if "to_state" in choice:
-            to_state = choice["to_state"]
-            scene["current_state"] = to_state
-        
-        #Check if this choice updates the game state
-        if "updates_game_state" in choice:
-            updates_game_state = choice["updates_game_state"]
-            for key in updates_game_state:
-                value = updates_game_state[key]
-                game_state[key] = value
+            scene["current_state"] = choice["to_state"]
+        if "to_scene" in choice:
+            scene = scenes[choice["to_scene"]]
 
-        #Wait for player input to continue
-        print("\nPress any key to continue...")
+        #Wait for player input to make the next iteration of the game loop
+        print("\nPress ENTER to continue...")
         input()
 
     return 0
 
 
-#Returns the data inside a json file
+#Aux function that reads the data of a json and return a dictionary
 def read_json(json_path):
     with open(json_path) as json_file:
         return json.load(json_file)
 
 
-def get_choices_filtered(choices, game_state):
+#Given the scene dictionary it returns the text of the current state
+def get_scene_text(scene):
+    current_state = scene["current_state"]
+    return scene["states"][current_state]["text"]
+
+
+#Given the scene sictionary it resurns all the choices of the current state
+def get_scene_choices(scene):
+    current_state = scene["current_state"]
+    return scene["states"][current_state]["choices"]
+
+
+#Filters the choices that has to be shown based on the game state
+def get_available_choices(scene, game_state):
     available_choices = []
+    
+    choices = get_scene_choices(scene)
     for choice in choices:
         choice_available = True
         if "show_if" in choice:
             for key in choice["show_if"]:
                 if game_state[key] != choice["show_if"][key]:
                     choice_available = False
+                    break
         if choice_available:
             available_choices.append(choice)
+    
     return available_choices
 
 
-#Returns the choice made by the player, it's an integer starting from 0
+#Prints the choices given by param
+def print_available_choices(available_choices):
+    i = 1
+    for available_choice in available_choices:
+        print(str(i) + " - " + available_choice["choice"])
+        i += 1
+
+
+#Returns the selected choice from a list of choices
 def select_choice(choices):
-    #Read choices until it's correct
     while True:
         print("\nWhat are you going to do? ")
-
-        #Read the player input
-        action = input()
+        player_choice = input()
         try:
-            action = int(action)
-            #Check if the action choosen is a correct choice
-            if action >= 0 and action < len(choices):
-                return action
+            player_choice = int(player_choice) - 1
+            if player_choice >= 0 and player_choice < len(choices):
+                return choices[player_choice]
             else:
                 print("This is not a correct choice, please try again.")
         except:
             print("This is not a correct choice, please try again.")
+
+
+#Updates the game state if the object has the property "updates_game_state"
+def update_game_state(object, game_state):
+    if "updates_game_state" in object:
+        updates_game_state = object["updates_game_state"]
+        for key in updates_game_state:
+            value = updates_game_state[key]
+            game_state[key] = value
 
 
 main()

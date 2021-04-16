@@ -1,0 +1,924 @@
+{
+    "start_menu": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "Welcome to DARK ROOM, a text game based on choices.",
+                "choices": [
+                    {
+                        "choice": "Start Game",
+                        "result": "Starting DARK ROOM adventure...",
+                        "to_scene": "starting_room"
+                    }, {
+                        "choice": "Exit",
+                        "result": "See you soon.",
+                        "to_state": "exit_game"
+                    }
+                ]
+            },
+            "exit_game": {
+                "text": "Game closing..."
+            }
+        }
+    },
+    "starting_room": {
+        "current_state": "dark_room",
+        "states": {
+            "dark_room": {
+                "text": "You wake up in a dark room, you don't know how you got here, you have these items in your pockets:\na lighter, a paperclip and a cigarette butt.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "You can't see anything."
+                    }, {
+                        "choice": "Lighter", 
+                        "result": "The room lights up a bit.",
+                        "to_state": "lit_room"
+                    }, {
+                        "choice": "Paperclip", 
+                        "result": "Useless for now, may be useful later."
+                    }, {
+                        "choice": "Cigarette Butt", 
+                        "result": "Useless."
+                    }
+                ]
+            }, 
+            "lit_room": {
+                "text": "The room's weird, it has no windows and its walls are strange, they look meaty. There's a shut door and a locked cabinet.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "The room is weird, it has no windows and its walls are strange, they look meaty."
+                    }, {
+                        "choice": "Examine Cabinet", 
+                        "result": "A nice-looking cabinet."
+                    }, {
+                        "choice": "Go to Cabinet",
+                        "result": "You get near the cabinet",
+                        "to_scene": "cabinet",
+                        "show_if": {"door_key": false}
+                    }, {
+                        "choice": "Go to Cabinet",
+                        "result": "There's nothing useful here anymore.",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Strange Key",
+                        "result": "The key looks weird. It feels cold to the touch, it almost hurts.",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Examine Door",
+                        "result": "A normal door."
+                    }, {
+                        "choice": "Go to Door",
+                        "result": "You get near the door.",
+                        "to_scene": "door"
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "Useless for now, may be useful later."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Useless."
+                    }
+                ]
+            }
+        }
+    },
+    "cabinet": {
+        "current_state": "locked",
+        "states": {
+            "locked": {
+                "text": "You stand near the cabinet.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It is locked."
+                    }, {
+                        "choice": "Open",
+                        "result": "I can't open it with my bare hands."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You unlock the cabinet with the paperclip.",
+                        "to_state": "open"
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "What are you trying to do?"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "open": {
+                "text": "The cabinet is now open.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "There is something inside."
+                    }, {
+                        "choice": "Search",
+                        "result": "You find a strange key.",
+                        "to_state": "open_key",
+                        "updates_game_state": {"door_key": true}
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to were you were.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "open_key": {
+                "text": "You took the strange key from the cabinet.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "There's nothing useful here anymore."
+                    }, {
+                        "choice": "Strange Key",
+                        "result": "The key looks weird. It feels cold to the touch, it almost hurts."
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to were you were.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            }
+        }
+    },
+    "door": {
+        "current_state": "locked",
+        "states": {
+            "locked": {
+                "text": "You stand near the door.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It is tightly shut."
+                    }, {
+                        "choice": "Open",
+                        "result": "I can't open it with my bare hands."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You can't open the door with the paperclip."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "You plan on opening the door with a cigarette butt?"
+                    }, {
+                        "choice": "Use the Strange Key",
+                        "result": "You unlock the door with the strange key.",
+                        "to_state": "unlocked",
+                        "show_if": {"door_key": true}
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "starting_room"
+                    }
+                ]
+            },
+            "unlocked": {
+                "text": "You unlocked the door.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "You see a kitchen on the other side."
+                    }, {
+                        "choice": "Go throught",
+                        "result": "You go throught the door.",
+                        "to_scene": "kitchen"
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "The door is already open."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Are you crazy??"
+                    }, {
+                        "choice": "Use the Strange Key",
+                        "result": "The door is already open."
+                    }, {
+                        "choice": "Back",
+                        "result": "There's no use in staying here."
+                    }
+                ]
+            }
+        }
+    },
+    "kitchen": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "You are in a kitchen, it smells rotten, you find the 'house's' fuse box and turn it on, you can finally see without the lighter. The walls look meaty too, there's a fridge, an oven and the usual furniture. There's a window and a - odd-looking - locked door, but it doesn't seem to have a lock, it has some strange markings on it.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "The walls look meaty, there's a fridge, an oven and the usual furniture."
+                    }, {
+                        "choice": "Window",
+                        "result": "You can only see a black void. It is tightly closed."
+                    }, {
+                        "choice": "Fridge",
+                        "result": "A common fridge."
+                    }, {
+                        "choice": "Go to Fridge",
+                        "result": "You get near the fridge.",
+                        "to_scene": "fridge",
+                        "show_if": {"bottle": false}
+                    }, {
+                        "choice": "Go to Fridge",
+                        "result": "There's nothing useful here anymore.",
+                        "show_if": {"bottle": true}
+                    }, {
+                        "choice": "Oven",
+                        "result": "It's a bit dirty."
+                    }, {
+                        "choice": "Go to Oven",
+                        "result": "You get near the Oven.",
+                        "to_scene": "oven",
+                        "show_if": {"note": false}
+                    }, {
+                        "choice": "Go to Oven",
+                        "result": "There's nothing useful here anymore.",
+                        "show_if": {"note": true}
+                    }, {
+                        "choice": "Countertop",
+                        "result": "It is a bit messy, there's a Knife on it."
+                    }, {
+                        "choice": "Go to Countertop",
+                        "result": "You get near the countertop.",
+                        "to_scene": "countertop",
+                        "show_if": {"knife": false}
+                    }, {
+                        "choice": "Go to Countertop",
+                        "result": "There's nothing useful here anymore.",
+                        "show_if": {"knife": true} 
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "What?! No."
+                    }, {
+                        "choice": "Strange Door",
+                        "result": "It looks weird, it has some strange markings on it."
+                    }, {
+                        "choice": "Go to Door",
+                        "result": "You get near the door.",
+                        "to_scene": "strange_door" 
+                    }, {
+                        "choice": "Bottle",
+                        "result": "The liquid inside it smells funny.",
+                        "show_if": {"bottle": true}
+                    }, {
+                        "choice": "Knife",
+                        "result": "It is very sharp.",
+                        "show_if": {"knife": true}
+                    }, {
+                        "choice": "Note",
+                        "result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+                        "show_if": {"note": true}
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "What?! No."
+                    }
+                ]
+            }
+        }
+    },
+    "fridge": {
+        "current_state": "closed",
+        "states": {
+            "closed": {
+                "text": "You stand near the fridge.",
+                "choices": [
+                    {
+                        "choice": "Examine", 
+                        "result": "A common fridge."
+                    }, {
+                        "choice": "Open",
+                        "result": "Full of rotten food, it smells awful, there's a water bottle - with an odd-colored liquid inside - that you can take.",
+                        "to_state": "opened"
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You don't need to use it."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Are you dumb?!"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+            "opened": {
+                "text": "You opened the fridge.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It is open."
+                    }, {
+                        "choice": "Open",
+                        "result": "It is already open."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You don't need to use it."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Are you dumb?!"
+                    }, {
+                        "choice": "Take the Bottle",
+                        "result": "You take the bottle.",
+                        "updates_game_state": {"bottle": true},
+                        "show_if": {"bottle": false}
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "oven": {
+        "current_state": "closed",
+        "states": {
+            "closed": {
+                "text": "You stand near the oven.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "A normal oven, it is a bit dirty."
+                    }, {
+                        "choice": "Open",
+                        "result": "There's an uncooked, rotten turkey inside, it smells really bad.",
+                        "to_state": "opened"
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You don't need to use it."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Hmm?!"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }, 
+            "opened": {
+                "text": "You opened the oven.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It is open."
+                    }, {
+                        "choice": "Open",
+                        "result": "It is already open."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You don't need to use it."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Are you dumb?!"
+                    }, {
+                        "choice": "Examine the Turkey",
+                        "result": "There is something inside it, it's gross but you take it.",
+                        "updates_game_state": {"note": true},
+                        "show_if": {"note": false}
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "countertop": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "You stand by the countertop.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It is a bit messy, there's a knife on it."
+                    }, {
+                        "choice": "Take the Knife",
+                        "result": "You pick up the knife.",
+                        "updates_game_state": {"knife": true},
+                        "show_if": {"knife": false}
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "You don't need to use it."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Huh?!"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            }
+        }
+    },
+    "strange_door": {
+        "current_state": "default",
+        "states": {
+            "default": {
+                "text": "You stand next to the door.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "It looks weird, it has some strange markings on it."
+                    }, {
+                        "choice": "Open",
+                        "result": "You don't know how, it has no doorknob."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "It has no lock to insert the paperclip in."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Huh?! The door reacts to the cigarette's components and a text appears on the door.",
+                        "to_state": "door_text"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+            "door_text": {
+                "text": "A text appeared on the door.",
+                "choices": [
+                    {
+                        "choice": "Examine",
+                        "result": "A text appeared on the door."
+                    }, {
+                        "choice": "Read",
+                        "result": "It reads 'You must use blood, but not pure blood...'."
+                    }, {
+                        "choice": "Paperclip",
+                        "result": "It has no lock to insert the paperclip in."
+                    }, {
+                        "choice": "Cigarette Butt",
+                        "result": "Nothing else happens."
+                    }, {
+                        "choice": "Ritual",
+                        "result": "Nothing happens.",
+                        "show_if": {"knife": false, "bottle": false} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "You have a knife, but something is missing.",
+                        "show_if": {"knife": true, "bottle": false} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "You have a bottle, but something is missing.",
+                        "show_if": {"knife": false, "bottle": true} 
+                    }, {
+                        "choice": "Ritual",
+                        "result": "You proceed to perform the ritual.",
+                        "show_if": {"knife": true, "bottle": true},
+						"to_state": "door_ritual"
+                    }, {
+                        "choice": "Back",
+                        "result": "You go back to where you were.",
+                        "to_scene": "kitchen"
+                    }
+                ]
+            },
+			"door_ritual": {
+				"text": "The door opened.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "The door is open."
+					}, {
+						"choice": "Paperclip",
+						"result": "There is no use doing that."
+					}, {
+						"choice": "Cigarette Butt",
+						"result": "Nothing else happens."
+					}, {
+						"choice": "Ritual",
+						"result": "You already performed the ritual."
+					}, {
+						"choice": "Enter",
+						"result": "You go through the door.",
+						"to_scene": "elevator"
+					}, {
+						"choice": "Back",
+						"result": "You can't go back now."
+					}
+				]
+			}
+        }
+    },
+	"elevator": {
+		"current_state": "floor_1",
+        "states": {
+			"floor_1": {
+				"text": "You are in an elevator. The sign reads '1st Floor'.",
+                "updates_game_state": {"woman_talked": false},
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "What is an elevator doing here?"
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "2nd Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_4"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "6th Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "7th Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "8th Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "9th Floor Button",
+						"result": "Nothing happens..."
+					}, {
+						"choice": "10th Floor Button",
+						"result": "Nothing happens..."
+					}
+				]
+			},
+			"floor_4": {
+				"text": "You get to the 4th floor.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 4th floor."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "2nd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_2"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "6th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "10th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_2": {
+				"text": "You get to the 2nd floor.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 2nd floor."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "6th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_6"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "10th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_6": {
+				"text": "You get to the 6th floor.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 6th floor."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "2nd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_2_2"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "10th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_2_2": {
+				"text": "You get to the 2nd floor.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 2nd floor, again."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "6th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "10th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_10"
+					}
+				]
+			},
+			"floor_10": {
+				"text": "You get to the 10th floor.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 10th floor, I'm getting tired."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "2nd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "5th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_5"
+					}, {
+						"choice": "6th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}
+				]
+			},
+			"floor_5": {
+				"text": "You get to the 5th floor. A young woman gets in.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "I'm on the 5th floor, now, geez. Now there's a woman with me."
+					}, {
+						"choice": "Buttons",
+						"result": "There are buttons up to the 10th Floor."
+					}, {
+						"choice": "Note",
+						"result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
+						"show_if": {"note": true}
+					}, {
+						"choice": "Woman",
+						"result": "She keeps staring at me, she's pretty cute."
+					}, {
+						"choice": "Talk to the Woman",
+						"result": "She opens her mouth and you pass out.",
+						"updates_game_state": {"woman_talked": true}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_scene": "ending",
+						"show_if":  {"woman_talked": false}
+					}, {
+						"choice": "1st Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1",
+						"show_if":  {"woman_talked": true}
+					}, {
+						"choice": "2nd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "3rd Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "4th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "6th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "7th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "8th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "9th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}, {
+						"choice": "10th Floor Button",
+						"result": "The elevator starts moving...",
+						"to_state": "floor_1"
+					}
+				]
+			}
+		}
+	},
+	"ending": {
+		"current_state": "default",
+        "states": {
+			"default": {
+				"text": "You pressed the button to the 1st floor but the elevator got to the 10th.\nThe woman asks you 'Where are you going?'.",
+				"choices": [
+					{
+						"choice": "Examine",
+						"result": "The buttons disappeared, you can't use the elevator anymore."
+					}, {
+						"choice": "Answer the Woman's Question",
+						"result": "She jumps you and digs her sharp teeth into your neck. You bleed to your death.",
+						"to_state": "death"
+					}, {
+						"choice": "Do Nothing",
+						"result": "I'm tired, this is getting me nowhere.",
+						"to_state": "trapped"
+					}, {
+						"choice": "Get Out",
+						"result": "You get out of the elevator.",
+						"to_state": "freedom"
+					}
+				]
+			},
+			"death": {
+				"text": "YOU DIED. GAME OVER. THE END. FIN. C'EST FINI. FINE."
+			},
+			"trapped": {
+				"text": "You remain in the elevator for the rest of your days.\nTHE END."
+			},
+			"freedom": {
+				"text": "You find yourself in an empty city, you feel desolate,\nbut anything is better than staying in that elevator with that weird woman.\nTHE END."
+			}
+		}
+	}
+}
