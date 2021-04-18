@@ -44,11 +44,11 @@
                 ]
             }, 
             "lit_room": {
-                "text": "La habitación es rara, no tiene ventanas y sus paredes son raras, parecen hechas de carne.\nVes una puerta y un armario, ambos cerrados.",
+                "text": "La habitación es extraña, no tiene ventanas y sus paredes son raras, parecen hechas de carne.\nVes una puerta y un armario, ambos cerrados.",
                 "choices": [
                     {
                         "choice": "Examinar",
-                        "result": "La habitación es rara, no tiene ventanas y sus paredes son raras, parecen hechas de carne."
+                        "result": "La habitación es extraña, no tiene ventanas y sus paredes son raras, parecen hechas de carne."
                     }, {
                         "choice": "Examinar el Armario", 
                         "result": "Es un armario bonito."
@@ -134,7 +134,7 @@
                         "choice": "Examinar",
                         "result": "Ya no hay nada de interés."
                     }, {
-                        "choice": "Strange Key",
+                        "choice": "Llave Extraña",
                         "result": "La llave tiene un diseño raro. Es fría al tacto, tanto que duele."
                     }, {
                         "choice": "Volver",
@@ -206,7 +206,7 @@
         "current_state": "default",
         "states": {
             "default": {
-                "text": "Estás en una cocina, huele a podrido. Encuentras la caja de fusibles de la 'casa' y la enciences, por fin puedes ver sin el mechero. Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina. También hay una ventana y una puerta muy rara, pero no parece tener cerradura, tiene unos extraños símbolos.",
+                "text": "Estás en una cocina, huele a podrido. Encuentras la caja de fusibles de la 'casa' y la enciendes, por fin puedes ver sin el mechero. Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina. También hay una ventana y una puerta muy rara, pero no parece tener cerradura, tiene unos extraños símbolos.",
                 "choices": [
                     {
                         "choice": "Examinar",
@@ -272,9 +272,6 @@
                         "choice": "Notita",
                         "result": "Tiene escrito: 'Ascensor: IV, II, VI, II, X, V, I. ¡SILENCIO!'.",
                         "show_if": {"note": true}
-                    }, {
-                        "choice": "Colilla",
-                        "result": "¡¿Qué?! No."
                     }
                 ]
             }
@@ -291,7 +288,7 @@
                         "result": "Una nevera como cualquier otra."
                     }, {
                         "choice": "Abrir",
-                        "result": "Está llena de comida podrida, apesta. Hay una botella, con un líquido de color extraño en su interior, que puedes coger.",
+                        "result": "Está llena de comida podrida, apesta.\nHay una botella, con un líquido de color extraño en su interior, que puedes coger.",
                         "to_state": "opened"
                     }, {
                         "choice": "Clip",
@@ -322,7 +319,7 @@
                         "choice": "Colilla",
                         "result": "¡¿Es que eres tonto?!"
                     }, {
-                        "choice": "Coger la Botella",
+                        "choice": "Coger Botella",
                         "result": "La coges y te la guardas.",
                         "updates_game_state": {"bottle": true},
                         "show_if": {"bottle": false}
@@ -374,10 +371,10 @@
                         "choice": "Clip",
                         "result": "No lo necesitas."
                     }, {
-                        "choice": "Cigarette Butt",
+                        "choice": "Colilla",
                         "result": "¡¿Mmh?!"
                     }, {
-                        "choice": "Examinar el Pavo",
+                        "choice": "Examinar Pavo",
                         "result": "Tiene algo dentro, es asqueroso pero lo coges.",
                         "updates_game_state": {"note": true},
                         "show_if": {"note": false}
@@ -400,7 +397,7 @@
                         "choice": "Examinar",
                         "result": "Está hecha un desastre, hay un cuchillo encima."
                     }, {
-                        "choice": "Coger el Cuchillo",
+                        "choice": "Coger Cuchillo",
                         "result": "Agarras el cuchillo y te lo guardas.",
                         "updates_game_state": {"knife": true},
                         "show_if": {"knife": false}
@@ -452,7 +449,7 @@
                         "choice": "Examinar",
                         "result": "Ha aparecido un texto en la puerta."
                     }, {
-                        "choice": "Leer el Texto",
+                        "choice": "Leer Texto",
                         "result": "Dice: 'Debes usar sangre, pero no sangre pura...'."
                     }, {
                         "choice": "Clip",
