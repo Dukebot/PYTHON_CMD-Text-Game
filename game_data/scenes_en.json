@@ -182,7 +182,7 @@
                         "choice": "Examine",
                         "result": "You see a kitchen on the other side."
                     }, {
-                        "choice": "Go throught",
+                        "choice": "Go Through",
                         "result": "You go throught the door.",
                         "to_scene": "kitchen"
                     }, {
@@ -212,10 +212,10 @@
                         "choice": "Examine",
                         "result": "The walls look meaty, there's a fridge, an oven and the usual furniture."
                     }, {
-                        "choice": "Window",
+                        "choice": "Examine Window",
                         "result": "You can only see a black void. It is tightly closed."
                     }, {
-                        "choice": "Fridge",
+                        "choice": "Examine Fridge",
                         "result": "A common fridge."
                     }, {
                         "choice": "Go to Fridge",
@@ -227,7 +227,7 @@
                         "result": "There's nothing useful here anymore.",
                         "show_if": {"bottle": true}
                     }, {
-                        "choice": "Oven",
+                        "choice": "Examine Oven",
                         "result": "It's a bit dirty."
                     }, {
                         "choice": "Go to Oven",
@@ -239,7 +239,7 @@
                         "result": "There's nothing useful here anymore.",
                         "show_if": {"note": true}
                     }, {
-                        "choice": "Countertop",
+                        "choice": "Examine Countertop",
                         "result": "It is a bit messy, there's a Knife on it."
                     }, {
                         "choice": "Go to Countertop",
@@ -272,9 +272,6 @@
                         "choice": "Note",
                         "result": "It reads: 'Elevator: IV, II, VI, II, X, V, I. SILENCE!'",
                         "show_if": {"note": true}
-                    }, {
-                        "choice": "Cigarette Butt",
-                        "result": "What?! No."
                     }
                 ]
             }
@@ -322,7 +319,7 @@
                         "choice": "Cigarette Butt",
                         "result": "Are you dumb?!"
                     }, {
-                        "choice": "Take the Bottle",
+                        "choice": "Take Bottle",
                         "result": "You take the bottle.",
                         "updates_game_state": {"bottle": true},
                         "show_if": {"bottle": false}
@@ -377,7 +374,7 @@
                         "choice": "Cigarette Butt",
                         "result": "Are you dumb?!"
                     }, {
-                        "choice": "Examine the Turkey",
+                        "choice": "Examine Turkey",
                         "result": "There is something inside it, it's gross but you take it.",
                         "updates_game_state": {"note": true},
                         "show_if": {"note": false}
@@ -400,7 +397,7 @@
                         "choice": "Examine",
                         "result": "It is a bit messy, there's a knife on it."
                     }, {
-                        "choice": "Take the Knife",
+                        "choice": "Take Knife",
                         "result": "You pick up the knife.",
                         "updates_game_state": {"knife": true},
                         "show_if": {"knife": false}

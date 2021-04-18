@@ -50,7 +50,7 @@
                         "choice": "Examinar",
                         "result": "La habitación es extraña, no tiene ventanas y sus paredes son raras, parecen hechas de carne."
                     }, {
-                        "choice": "Examinar el Armario", 
+                        "choice": "Examinar Armario", 
                         "result": "Es un armario bonito."
                     }, {
                         "choice": "Acercarse al Armario",
@@ -66,7 +66,7 @@
                         "result": "La llave tiene un diseño raro. Es fría al tacto, tanto que duele.",
                         "show_if": {"door_key": true}
                     }, {
-                        "choice": "Examinar la Puerta",
+                        "choice": "Examinar Puerta",
                         "result": "Una puerta normal y corriente."
                     }, {
                         "choice": "Acercarse a la Puerta",
@@ -206,16 +206,16 @@
         "current_state": "default",
         "states": {
             "default": {
-                "text": "Estás en una cocina, huele a podrido. Encuentras la caja de fusibles de la 'casa' y la enciendes, por fin puedes ver sin el mechero. Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina. También hay una ventana y una puerta muy rara, pero no parece tener cerradura, tiene unos extraños símbolos.",
+                "text": "Estás en una cocina, huele a podrido. Encuentras la caja de fusibles de la 'casa' y la enciendes, por fin puedes ver sin el mechero.\nLas paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina. También hay una ventana y una puerta muy rara, pero no parece tener cerradura, tiene unos extraños símbolos.",
                 "choices": [
                     {
                         "choice": "Examinar",
                         "result": "Las paredes parecen de carne. Hay una nevera, un horno y lo típico de una cocina."
                     }, {
-                        "choice": "Ventana",
+                        "choice": "Examinar Ventana",
                         "result": "Solo puedes ver un oscuro vacío. Está bien cerrada."
                     }, {
-                        "choice": "Nevera",
+                        "choice": "Examinar Nevera",
                         "result": "Una nevera como cualquier otra."
                     }, {
                         "choice": "Acercarse a la Nevera",
@@ -227,7 +227,7 @@
                         "result": "Ya no contiene nada útil.",
                         "show_if": {"bottle": true}
                     }, {
-                        "choice": "Horno",
+                        "choice": "Examinar Horno",
                         "result": "Está un poco sucio."
                     }, {
                         "choice": "Acercarse al Horno",
@@ -239,7 +239,7 @@
                         "result": "Ya no contiene nada útil.",
                         "show_if": {"note": true}
                     }, {
-                        "choice": "Encimera",
+                        "choice": "Examinar Encimera",
                         "result": "Está hecha un desastre, hay un cuchillo encima."
                     }, {
                         "choice": "Acercarse a la Encimera",
@@ -254,7 +254,7 @@
                         "choice": "Colilla",
                         "result": "¡¿Qué?! No."
                     }, {
-                        "choice": "Puerta Misteriosa",
+                        "choice": "Examinar Puerta Misteriosa",
                         "result": "Es rara, tiene unos extraños símbolos."
                     }, {
                         "choice": "Acercarse a la Puerta",
