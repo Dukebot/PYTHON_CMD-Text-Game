@@ -59,7 +59,7 @@ class CursesMenu(object):
             exit_keys = [ord('q')]
 
             if input_key in down_keys:
-                if self.selected_option < option_count:
+                if self.selected_option < option_count - 1:
                     self.selected_option += 1
                 else:
                     self.selected_option = 0
@@ -77,7 +77,7 @@ class CursesMenu(object):
         return self.selected_option
 
     def _draw_option(self, option_number, style):
-        self.screen.addstr(7 + option_number,
+        self.screen.addstr(8 + option_number,
                            4,
                            "{}".format(self.menu_options['options'][option_number]['title']),
                            style)
@@ -144,12 +144,18 @@ def choice_menu(scene,choices):
         'type' : 'menu',
         'subtitle' : get_scene_text(scene)}
     
-    menu_items = []
     i = 0
-    
-    for choice in choices:
-        menu_items.append({'title': choice["choice"], 'type': 'choice_num', 'choice_num': i})
-        i += 1
+    menu_items = []
+
+    # Fallback for the end because there are no choices
+    if choices == None:
+        menu_items.append({'title': 'END', 'type': 'end', 'choice_num': 0})
+
+    # Normal flow
+    else:
+        for choice in choices:
+           menu_items.append({'title': choice["choice"], 'type': 'choice_num', 'choice_num': i})
+           i += 1
 
     menu['options'] = menu_items
     m = CursesMenu(menu)
@@ -215,13 +221,12 @@ def main():
         current_state = scene["current_state"]
         update_game_state(scene["states"][current_state], game_state)
 
-        #If this scene do not have available choices it means we reached the end of the game
-        if not "choices" in scene["states"][current_state]:
-            print_with_ncurses("Press ENTER to END...")
-            break
-
         #Get the available choices of this scene
-        available_choices = get_available_choices(scene, game_state)
+
+        try:
+            available_choices = get_available_choices(scene, game_state)
+        except:
+            available_choices = None
         
         #Select the choice and print the result on the screen
         choice = choice_menu(scene, available_choices)
