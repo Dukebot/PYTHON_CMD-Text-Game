@@ -3,3 +3,6 @@ How to create program executable on Windows:
         pyinstaller --onefile main.py
     Put the generated ".exe" at the same level of the folder "game_data".
     Run and enjoy.
+
+Dependencies
+    python -m pip install windows-curses
