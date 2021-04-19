@@ -25,7 +25,7 @@
         "current_state": "dark_room",
         "states": {
             "dark_room": {
-                "text": "You wake up in a dark room, you don't know how you got here, you have these items in your pockets:\na lighter, a paperclip and a cigarette butt.",
+                "text": "You wake up in a dark room, you don't know how you got here, you have these items in your pockets:\n a lighter, a paperclip and a cigarette butt.",
                 "choices": [
                     {
                         "choice": "Examine",
