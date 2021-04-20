@@ -1,6 +1,7 @@
 import json
 from ncurses import CursesMenu
 
+
 #Aux function that reads the data of a json and return a dictionary
 def read_json(json_path):
     #Encoding 'utf-8' for spanish special characters like accents
@@ -37,37 +38,44 @@ def get_available_choices(scene, game_state):
     
     return available_choices
 
-def print_with_ncurses(str):
-    menu = {'title' : 'The Dark Room',
-        'type' : 'menu',
-        'subtitle' : str}
 
+#TODO define this inside the Json to be generic
+def print_choice_result(str):
+    menu = {
+        'title' : 'The Dark Room',
+        'type' : 'menu',
+        'subtitle' : str
+    }
     menu['options'] = [{'title' : 'Continue'}]
     m = CursesMenu(menu)
     m.display()
 
-def choice_menu(scene,choices):
-    menu = {'title' : 'The Dark Room',
+
+def print_scene_and_get_choice(scene, choices):
+    menu = {
+        'title' : 'The Dark Room',
         'type' : 'menu',
-        'subtitle' : get_scene_text(scene)}
-    
+        'subtitle' : get_scene_text(scene)
+    }
     i = 0
     menu_items = []
 
     # Fallback for the end because there are no choices
     if choices == None:
         menu_items.append({'title': 'END', 'type': 'end', 'choice_num': 0})
-
     # Normal flow
     else:
         for choice in choices:
-           menu_items.append({'title': choice["choice"], 'type': 'choice_num', 'choice_num': i})
-           i += 1
+            menu_items.append({
+               'title': choice["choice"], 'type': 'choice_num', 'choice_num': i
+            })
+            i += 1
 
     menu['options'] = menu_items
     m = CursesMenu(menu)
     selected_action = m.display()
     return choices[selected_action['choice_num']]
+
 
 #Returns the selected choice from a list of choices
 def select_choice(choices):
@@ -94,26 +102,31 @@ def update_game_state(object, game_state):
 
 
 #This functions allows the player to select the language and returns it's code (string)
-def intro():
-
-    menu = {'title' : 'The Dark Room',
+def select_language():
+    menu = {
+        'title' : 'The Dark Room',
         'type' : 'menu',
-        'subtitle' : 'Which language are you going to choose?'}
-    
-    option_1 = {'title' : 'English',
-            'type' : 'language',
-            'language' : 'en'}
-    
-    option_2 ={'title' : 'Español',
-            'type' : 'language',
-            'language' : 'es'}
-    menu['options'] = [option_1,option_2]
+        'subtitle' : 'Which language are you going to choose?'
+    }
+    option_1 = {
+        'title' : 'English',
+        'type' : 'language',
+        'language' : 'en'
+    }
+    option_2 ={
+        'title' : 'Español',
+        'type' : 'language',
+        'language' : 'es'
+    }
+
+    menu['options'] = [option_1, option_2]
     m = CursesMenu(menu)
     selected_action = m.display()  
     return selected_action['language']
 
+
 def main():
-    language = intro()
+    language = select_language()
 
     #Read the game data from json files
     game_state = read_json('game_data/game_state.json')
@@ -129,16 +142,15 @@ def main():
         update_game_state(scene["states"][current_state], game_state)
 
         #Get the available choices of this scene
-
         try:
             available_choices = get_available_choices(scene, game_state)
         except:
             available_choices = None
         
         #Select the choice and print the result on the screen
-        choice = choice_menu(scene, available_choices)
+        choice = print_scene_and_get_choice(scene, available_choices)
         update_game_state(choice, game_state)
-        print_with_ncurses(choice["result"])
+        print_choice_result(choice["result"])
 
         #Update state and handle scene transition
         if "to_state" in choice:
@@ -147,6 +159,7 @@ def main():
             scene = scenes[choice["to_scene"]]
 
     return 0
+
 
 if __name__ == "__main__":
     main()
